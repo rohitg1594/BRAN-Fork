@@ -15,7 +15,7 @@ from functools import partial
 from nltk.tokenize import sent_tokenize
 import string
 sys.path.insert(0, './src/processing/utils/')
-from word_piece_tokenizer import WordPieceTokenizer
+from src.processing.utils.word_piece_tokenizer import WordPieceTokenizer
 
 
 tf.app.flags.DEFINE_string('kg_in_files', '', 'pattern to match kg input files')
@@ -43,7 +43,7 @@ if FLAGS.word_piece_codes:
     wpt = WordPieceTokenizer(FLAGS.word_piece_codes, entity_str=ENTITY_STRING)
     tokenize = wpt.tokenize
 else:
-    import genia_tokenizer
+    import src.processing.utils.genia_tokenizer as genia_tokenizer
     tokenize = genia_tokenizer.tokenize
 
 def features(d): return tf.train.Features(feature=d)
@@ -319,7 +319,7 @@ def tsv_to_examples():
 
 
 def main(argv):
-    print('\n'.join(sorted(["%s : %s" % (str(k), str(v)) for k, v in FLAGS.__dict__['__flags'].iteritems()])))
+    print('\n'.join(sorted(["%s : %s" % (str(k), str(v)) for k, v in FLAGS.flag_values_dict().iteritems()])))
     if FLAGS.out_dir == '':
         print('Must supply out_dir')
         sys.exit(1)

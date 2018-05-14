@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-input_dir=/home/pat/data/biocreative/ChemProt_Corpus/
+input_dir=${CDR_IE_ROOT}/data/chemprot_corpus
 # replace infrequent tokens with <UNK>
 min_count=5
 max_len=500000
