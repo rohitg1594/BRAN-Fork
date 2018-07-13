@@ -22,12 +22,12 @@ export ner_weight=10.0
 export logdir=$LOG_DIR
 export optimizer=adam
 export model_type=classifier
-# export embeddings=${CDR_IE_ROOT}/embeddings/PubMed-and-PMC-w2v.txt
+export embeddings=${CDR_IE_ROOT}/embeddings/PubMed-and-PMC-w2v.txt
 
 export bidirectional=True
 export in_memory=True
 export text_encoder=transformer_cnn_all_pairs
-export num_classes=6
+export num_classes=8
 export kb_vocab_size=6
 export block_repeats=2
 
