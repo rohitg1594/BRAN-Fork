@@ -2,24 +2,23 @@ import numpy as np
 import src.tf_utils as tf_utils
 
 def batch_feed_dict(batcher, sess, model, FLAGS, evaluate=False, string_int_maps=None):
-    batch = batcher.next_batch(sess)
-    e1, e2, ep, rel, tokens, e1_dist, e2_dist, seq_len, doc_ids = batch
-    if evaluate:
-        print('EVALUATE')
-        print('E1 : {}'.format(e1_dist))
-        print('E2 : {}'.format(e2_dist))
-    else:
-        print('TRAIN')
-        print('E1 : {}'.format(e1_dist))
-        print('E2 : {}'.format(e2_dist))
-    tokens = tokens if evaluate else tf_utils.word_dropout(tokens, FLAGS.word_unk_dropout)
-    e1_dist = e1_dist if evaluate else tf_utils.word_dropout(e1_dist, FLAGS.pos_unk_dropout, unk_id=0)
-    e2_dist = e2_dist if evaluate else tf_utils.word_dropout(e2_dist, FLAGS.pos_unk_dropout, unk_id=0)
+    while True:
+        batch = batcher.next_batch(sess)
+        e1, e2, ep, rel, tokens, e1_dist, e2_dist, seq_len, doc_ids = batch
 
-    ep_dist = np.full((e1_dist.shape[0], e1_dist.shape[1], e1_dist.shape[1]), -1e8)
-    ep_indices = [(b, ei, ej) for b in range(e1_dist.shape[0])
-                  for ei in np.where(e1_dist[b] == 1)[0]
-                  for ej in np.where(e2_dist[b] == 1)[0]]
+        tokens = tokens if evaluate else tf_utils.word_dropout(tokens, FLAGS.word_unk_dropout)
+        e1_dist = e1_dist if evaluate else tf_utils.word_dropout(e1_dist, FLAGS.pos_unk_dropout, unk_id=0)
+        e2_dist = e2_dist if evaluate else tf_utils.word_dropout(e2_dist, FLAGS.pos_unk_dropout, unk_id=0)
+
+        ep_dist = np.full((e1_dist.shape[0], e1_dist.shape[1], e1_dist.shape[1]), -1e8)
+        ep_indices = [(b, ei, ej) for b in range(e1_dist.shape[0])
+                      for ei in np.where(e1_dist[b] == 1)[0]
+                      for ej in np.where(e2_dist[b] == 1)[0]]
+        if len(ep_indices) == 3:
+            break
+        else:
+            print('GOING TO NEXT BATCH')
+
     b, r, c = zip(*ep_indices)
     ep_dist[b, r, c] = 0.0
 
