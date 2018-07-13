@@ -87,7 +87,6 @@ class InMemoryBatcher(Batcher):
         try:
             while max_batches <= 0 or batch_num < max_batches:
                 batch = sess.run(self.next_batch_op)
-                print('BATCH : {}'.format(batch))
                 e1, e2, ep, rel, tokens, e1_dist, e2_dist, seq_len, doc_id = batch
 
                 batch = [(_e1, _e2, _ep, _rel, _tokens, _e1_dist, _e2_dist, _seq_len, _doc_id)

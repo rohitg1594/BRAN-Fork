@@ -4,6 +4,14 @@ import src.tf_utils as tf_utils
 def batch_feed_dict(batcher, sess, model, FLAGS, evaluate=False, string_int_maps=None):
     batch = batcher.next_batch(sess)
     e1, e2, ep, rel, tokens, e1_dist, e2_dist, seq_len, doc_ids = batch
+    if evaluate:
+        print('EVALUATE')
+        print('E1 : {}'.format(e1_dist))
+        print('E2 : {}'.format(e2_dist))
+    else:
+        print('TRAIN')
+        print('E1 : {}'.format(e1_dist))
+        print('E2 : {}'.format(e2_dist))
     tokens = tokens if evaluate else tf_utils.word_dropout(tokens, FLAGS.word_unk_dropout)
     e1_dist = e1_dist if evaluate else tf_utils.word_dropout(e1_dist, FLAGS.pos_unk_dropout, unk_id=0)
     e2_dist = e2_dist if evaluate else tf_utils.word_dropout(e2_dist, FLAGS.pos_unk_dropout, unk_id=0)
