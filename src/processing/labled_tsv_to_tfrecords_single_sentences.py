@@ -151,9 +151,12 @@ def make_example_all_mentions(entity_map, ep_map, rel_map, token_map, line, writ
 
     annotation_map = {}
     tokens_str = convert_to_single_sentence(tokens_str, e1_start, e1_end, e2_start, e2_end, annotation_map)
+    #print('TOKEN STR : {}'.format(tokens_str))
     if tokens_str:
         i = 0
         final_str_list = []
+        e1_indices = []
+        e2_indices = []
         for w in tokens_str:
             if isinstance(w, basestring):
                 final_str_list.append(w)

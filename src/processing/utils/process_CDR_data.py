@@ -162,6 +162,8 @@ def make_ner_examples(doc_id, tokens, entities, out_file, filter_entities, label
     return ner_examples
 
 
+
+
 in_f = gzip.open(args.input_file, 'rb') if args.input_file.endswith('gz') else codecs.open(args.input_file, 'r', args.encoding)
 ner_out_file = codecs.open('%s/ner_%s' % (args.output_dir, args.output_file_suffix), 'w', args.encoding)
 positive_outs = [codecs.open('%s/positive_%d_%s' % (args.output_dir, i, args.output_file_suffix), 'w', args.encoding)
@@ -187,7 +189,6 @@ while not done:
         abstract = ''.join(in_f.readline().strip().split('|')[2:])
         line_num += 1
         current_pub = '%s %s' % (title, abstract)
-
         label_annotations = {}
         current_annotations = []
         try:
