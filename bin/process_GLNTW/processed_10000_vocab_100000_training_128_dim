@@ -21,13 +21,13 @@ proto_dir=${processed_dir}/protos
 
 # process train, dev, and test data
 echo "Processing Training data"
-python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_data.py --input_file ${input_dir}/train/chemical_disease_pubtator_20000.tsv --output_dir ${processed_dir} --output_file_suffix CDR_train.txt --max_seq ${max_len} --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
+python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_data.py --input_file ${input_dir}/train/chemical_disease_pubtator_100000.tsv --output_dir ${processed_dir} --output_file_suffix CDR_train.txt --max_seq ${max_len} --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
 
 echo "Processing Dev data"
-python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_data.py --input_file ${input_dir}/dev/chemical_disease_pubtator_2000.tsv --output_dir ${processed_dir} --output_file_suffix CDR_dev.txt --max_seq ${max_len} --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
+python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_data.py --input_file ${input_dir}/dev/chemical_disease_pubtator_10000.tsv --output_dir ${processed_dir} --output_file_suffix CDR_dev.txt --max_seq ${max_len} --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
 
 echo "Processing Test data"
-python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_data.py --input_file ${input_dir}/test/chemical_disease_pubtator_2000.tsv --output_dir ${processed_dir} --output_file_suffix CDR_test.txt --max_seq ${max_len} --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
+python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_data.py --input_file ${input_dir}/test/chemical_disease_pubtator_10000.tsv --output_dir ${processed_dir} --output_file_suffix CDR_test.txt --max_seq ${max_len} --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
 
 echo "Converting processed data to tensorflow protobufs"
 python ${CDR_IE_ROOT}/src/processing/labled_tsv_to_tfrecords_single_sentences.py --text_in_files ${processed_dir}/\*tive_\*CDR_train.txt --out_dir ${proto_dir} --max_len ${max_len} --num_threads 10 --multiple_mentions --tsv_format --min_count ${min_count} --sentence_window 0
