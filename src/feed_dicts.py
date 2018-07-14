@@ -14,13 +14,13 @@ def batch_feed_dict(batcher, sess, model, FLAGS, evaluate=False, string_int_maps
         ep_indices = [(b, ei, ej) for b in range(e1_dist.shape[0])
                       for ei in np.where(e1_dist[b] == 1)[0]
                       for ej in np.where(e2_dist[b] == 1)[0]]
-        print('EP_INDICES, LEN : {}, VALUES : {}'.format(len(ep_indices)))
+        print('EP_INDICES, LEN : {}, VALUES : {}'.format(len(ep_indices), ep_indices))
         try:
             b, r, c = zip(*ep_indices)
         except:
             print('GOING TO NEXT BATCH')
             continue
-    
+
     ep_dist[b, r, c] = 0.0
 
     if FLAGS.start_end:
