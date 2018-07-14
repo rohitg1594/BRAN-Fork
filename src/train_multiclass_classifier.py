@@ -144,7 +144,7 @@ def main(argv):
     if ('transformer' in FLAGS.text_encoder or 'glu' in FLAGS.text_encoder) and FLAGS.token_dim == 0:
         FLAGS.token_dim = FLAGS.embed_dim-(2*FLAGS.position_dim)
     # print flags:values in alphabetical order
-    print ('\n'.join(sorted(["%s : %s" % (str(k), str(v)) for k, v in FLAGS.flag_values_dict().items()])))
+    print ('\n'.join(sorted(["%s : %s" % (str(k), str(v)) for k, v in FLAGS.__dict__['__flags'].iteritems()])))
 
     if FLAGS.vocab_dir == '':
         print('Error: Must supply input data generated from tsv_to_tfrecords.py')
