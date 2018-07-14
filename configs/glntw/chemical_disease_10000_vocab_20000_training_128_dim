@@ -1,7 +1,7 @@
 export MODEL_NAME='glntw/chemical_disease_10000_vocab_20000_training_128_dim'
 export train=${CDR_IE_ROOT}/src/train_multiclass_classifier.py
 
-data_root=${CDR_IE_ROOT}/data/global_network/processed_7500_window0_sentencener/protos
+data_root=${CDR_IE_ROOT}/data/global_network/processed_10000_vocab_20000_training_128_dim/protos
 export vocab_dir=${data_root}
 
 export positive_train=${data_root}/positive_0_CDR_train.txt.proto
