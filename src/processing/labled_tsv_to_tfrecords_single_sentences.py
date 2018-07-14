@@ -322,7 +322,7 @@ def tsv_to_examples():
 
 
 def main(argv):
-    print('\n'.join(sorted(["%s : %s" % (str(k), str(v)) for k, v in FLAGS.flag_values_dict().iteritems()])))
+    print('\n'.join(sorted(["%s : %s" % (str(k), str(v)) for k, v in FLAGS.__dict__['__flags'].iteritems()])))
     if FLAGS.out_dir == '':
         print('Must supply out_dir')
         sys.exit(1)
