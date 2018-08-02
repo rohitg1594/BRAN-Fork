@@ -250,7 +250,7 @@ while not done:
                           in zip(token_lens, token_offsets, valid_tokenized_sentences)]
         out_examples = [make_examples(pub_id, sent, offset, filter_entities=None, label_map=label_annotations)
                         for sent, offset in zip(out_sentence, entity_offsets)]
-
+        print(out_examples)
         for ex_pos_count in out_examples:
             ex_label, pos_count = ex_pos_count
             if ex_label and (pos_count > 0 or args.export_negatives):
