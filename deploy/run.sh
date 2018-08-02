@@ -18,4 +18,4 @@ python ${CDR_IE_ROOT}/src/processing/labled_tsv_to_tfrecords_single_sentences.py
 python ${CDR_IE_ROOT}/src/processing/utils/sentence_segment_conll.py -i ${processed_dir}/ner_processed.txt -o ${processed_dir}/ner_processed_sentence.txt -e  utf-8
 
 # convert ner data to tf protos
-python ${CDR_IE_ROOT}/src/processing/ner_to_tfrecords.py --in_files ${processed_dir}/ner_processed_sentence.txt --out_dir ${proto_dir} --load_vocab ${proto_dir} --num_threads 5
+python ${CDR_IE_ROOT}/src/processing/ner_to_tfrecords.py --in_files ${processed_dir}/ner_processed_sentence.txt --out_dir ${protos_dir} --load_vocab ${proto_dir} --num_threads 5
