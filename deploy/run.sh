@@ -7,7 +7,7 @@ protos_dir=${CDR_IE_ROOT}/processed
 mkdir -p ${CDR_IE_ROOT}/processed
 mkdir -p ${CDR_IE_ROOT}/protos 
 
-python ${CDR_IE_ROOT}/deploy/download_pubtator --pid $pid
+python ${CDR_IE_ROOT}/deploy/download_pubtator.py --pid $pid
 
 python ${CDR_IE_ROOT}/src/processing/utils/process_CDR_new.py --input_file ${CDR_IE_ROOT}/deploy/test.tsv --output_dir ${processed_dir} --output_file_suffix processed.txt --max_seq 2000000 --full_abstract True --encoding utf-8 --export_all_eps True --word_piece_codes ${word_piece_vocab}
 
