@@ -250,7 +250,7 @@ while not done:
                           in zip(token_lens, token_offsets, valid_tokenized_sentences)]
         out_examples = [make_examples(pub_id, sent, offset, filter_entities=None, label_map=label_annotations)
                         for sent, offset in zip(out_sentence, entity_offsets)]
-        print(out_examples)
+        #print(out_examples)
         for ex_pos_count in out_examples:
             ex_label, pos_count = ex_pos_count
             if ex_label and (pos_count > 0 or args.export_negatives):
@@ -270,12 +270,13 @@ while not done:
         #    print(line_num)
         #    print('Error: %s' % e)
     #except Exception as e2:
-        done = True
-        in_f.close()
-        ner_out_file.close()
-        for i in range(0, int(args.shards)):
-            positive_outs[shard_id].close()
-            negative_outs[shard_id].close()
+    done = True
+    in_f.close()
+    ner_out_file.close()
+    shard_id = 0
+    for i in range(0, int(args.shards)):
+        positive_outs[shard_id].close()
+        negative_outs[shard_id].close()
 
 sys.stdout.write('\rpubs %d  annotations: %d   lines %d  examples :%d  pos_examples: %d   pos_example_annotations %d\n'
       % (valid_pubs, total_annotations, line_num, exported_triples, pos_interactions, pos_interactions_gold))
