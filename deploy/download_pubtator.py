@@ -3,13 +3,14 @@ import requests
 import argparse
 
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('--pid', type=int, default=1329249
+parser.add_argument('--pid', type=int, default=1329249,
                     help='an integer for the accumulator')
+parser.add_argument('--out_file', type=str, help='output file for pubtator')
 args = parser.parse_args()
-pid = args['pid']
+pid = args.pid
 ncbi_url = "https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/RESTful/tmTool.cgi/BioConcept/"
 
-with open("deploy_test/test.tsv", "w") as f:
+with open(args.out_file, "w") as f:
     url_submit =  ncbi_url + str(pid) + "/PubTator/"
     print('created url')
     try: 

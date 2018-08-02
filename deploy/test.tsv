@@ -1,0 +1,33 @@
+1329249|t|Heparin potentiation of collagen-induced platelet aggregation is related to the GPIIb/GPIIIa receptor and not to the GPIb receptor, as tested by whole blood aggregometry.
+1329249|a|To determine whether heparin potentiation of platelet aggregation is related to platelet GP IIb/IIIa and GP Ib receptors, four series of experiments were performed on blood from normal volunteers. In the first experiment pretreatment with the monoclonal antibody 7E3 (MAb 7E3), which antagonizes at the GP IIb/IIIa receptor, potently inhibited the collagen-induced platelet aggregation (p less than 0.001). With heparin added to blood pretreated with MAb 7E3, the aggregation increased (p less than 0.005) to an extent similar to that when only saline was used for pretreatment. In the second experiment, monoclonal antibody 10E5 (MAb 10E5) and peptide RGDS, substances which also antagonize at the GP IIb/IIIa receptor, decreased collagen-induced platelet aggregation to an extent similar to that after pretreatment with MAb 7E3. Following pretreatment with RGDS, heparin increased platelet aggregation (p less than 0.03), while after pretreatment with antibody MAb 10E5 heparin did not enhance platelet aggregation. In the third experiment aurin, an inhibitor of von Willebrand factor and its interaction with the platelet GPIb receptor, decreased platelet aggregation dose-dependently. In the fourth experiment heparin enhanced platelet aggregation to a similar extent (p less than 0.005), regardless of pretreatment of the blood with saline, aurin or monoclonal antibody 6D1 (MAb 6D1), the latter an antagonist at the GP Ib receptor. In conclusion, the potentiation of collagen-induced platelet aggregation by heparin was not inhibited by MAb 7E3, RGDS, aurin or MAb 6D1, but was abolished by MAb 10E5, implying that the heparin effect is related to activation of the platelet GP IIb/IIIa receptor complex.
+1329249	0	7	Heparin	Chemical	D006493
+1329249	41	61	platelet aggregation	Disease	D001791
+1329249	80	85	GPIIb	Gene	3674
+1329249	192	199	heparin	Chemical	D006493
+1329249	216	236	platelet aggregation	Disease	D001791
+1329249	260	266	GP IIb	Gene	3674
+1329249	474	480	GP IIb	Gene	3674
+1329249	536	556	platelet aggregation	Disease	D001791
+1329249	583	590	heparin	Chemical	D006493
+1329249	627	629	E3	Chemical	D017308
+1329249	798	800	E5	Chemical	D017308
+1329249	824	828	RGDS	Gene	5900
+1329249	870	876	GP IIb	Gene	3674
+1329249	919	939	platelet aggregation	Disease	D001791
+1329249	1030	1034	RGDS	Gene	5900
+1329249	1036	1043	heparin	Chemical	D006493
+1329249	1054	1074	platelet aggregation	Disease	D001791
+1329249	1138	1150	10E5 heparin	Chemical	C005629
+1329249	1167	1187	platelet aggregation	Disease	D001791
+1329249	1236	1250	von Willebrand	Disease	D014842
+1329249	1311	1341	decreased platelet aggregation	Disease	D001791
+1329249	1385	1392	heparin	Chemical	D006493
+1329249	1402	1422	platelet aggregation	Disease	D001791
+1329249	1661	1681	platelet aggregation	Disease	D001791
+1329249	1685	1692	heparin	Chemical	D006493
+1329249	1723	1727	RGDS	Gene	5900
+1329249	1774	1776	E5	Chemical	D017308
+1329249	1796	1803	heparin	Chemical	D006493
+1329249	1852	1858	GP IIb	Gene	3674
+1329249	TEST_REL	TEST_ID1	TEST_ID2
+
