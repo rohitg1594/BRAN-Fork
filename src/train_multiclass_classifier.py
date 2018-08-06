@@ -275,7 +275,7 @@ def main(argv):
         ner_test_batcher = NERInMemoryBatcher(FLAGS.ner_test, 1, FLAGS.max_seq, 10) if FLAGS.ner_test else None
         ner_batcher = NERBatcher(FLAGS.ner_train, FLAGS.text_epochs, FLAGS.max_seq, FLAGS.ner_batch) \
             if FLAGS.ner_train != '' else None
-
+        print(tf.global_variables())
         # initialize model
         if 'multi' in FLAGS.model_type and 'label' in FLAGS.model_type:
             model_type = MultiLabelClassifier
