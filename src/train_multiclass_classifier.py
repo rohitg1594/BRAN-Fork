@@ -286,6 +286,7 @@ def main(argv):
         print('Model type: %s ' % FLAGS.model_type)
         model = model_type(ep_vocab_size, entity_vocab_size, kb_vocab_size, token_vocab_size, position_vocab_size,
                            ner_label_vocab_size, word_embedding_matrix, entity_embedding_matrix, string_int_maps, FLAGS)
+        print(tf.global_variables())
 
         # optimization
         learning_rate = tf.train.exponential_decay(FLAGS.lr, model.global_step, FLAGS.lr_decay_steps,
