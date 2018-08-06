@@ -1,0 +1,116 @@
+alternate_var_train : 0
+analyze_errors : 0
+anneal_ner : False
+arg_entities : False
+beta2 : 0.9
+bidirectional : True
+block_repeats : 2
+candidate_file : 
+center_only : False
+clip_norm : 10.0
+debug : False
+doc_filter : 
+dropout_loss_weight : 0.0
+embed_dim : 128
+embeddings : /home/rogupta/Team_project/bran/embeddings/just_train_10000_128d
+entity_embeddings : 
+epsilon : 1e-08
+eval_batch : 8
+eval_every : 33000
+export_file : predictions/chemical_disease_10000_vocab_100000_training_128_dim.tsv
+f_beta : 1
+fb15k_dir : 
+filter_pad : False
+final_dropout : 0.5
+freeze : False
+freeze_noise : False
+in_memory : True
+kb_batch : 32
+kb_epochs : 100
+kb_pretrain : 0
+kb_train : 
+kb_vocab_size : 6
+kg_label_file : 
+l2_weight : 0.0
+label_weights : 
+layer_str : 1:1,5:1,1:1
+load_model : pre_trained_models/global_network/chemical_disease_10000_vocab_100000_training_128_dim.tf
+log_every : 10
+logdir : /home/rogupta/Team_project/bran/saved_models/glntw/chemical_disease_10000_vocab_100000_training_128_dim/2018-08-06-18//10631_6611
+loss_type : 
+lr : 0.0005
+lr_decay_rate : 0.75
+lr_decay_steps : 25000
+lstm_dim : 128
+lstm_dropout : 0.85
+margin : 1.0
+master : 
+max_decrease_epochs : 33
+max_pool : False
+max_seq : 2000
+max_steps : -1
+mlp : False
+mode : evaluate
+model_type : classifier
+nci_dir : 
+neg_count : 20252779
+neg_noise : 0.2
+neg_samples : 200
+negative_dist_train : 
+negative_test : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/negative_0_CDR_train_dev.txt.proto
+negative_test_test : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/negative_0_CDR_test*.txt.proto
+negative_train : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/negative_0_CDR_train.txt.proto
+ner_batch : 32
+ner_prob : 0.5
+ner_test : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/ner_CDR_dev_sentence.txt.proto
+ner_train : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/ner_CDR_train_sentence.txt.proto
+ner_weight : 10.0
+noise_dir : 
+noise_std : 1.0
+norm_digits : True
+norm_entities : False
+null_label : 0
+num_classes : 8
+optimizer : adam
+pattern_dropout : 10
+percentile : False
+pos_count : 2206761
+pos_noise : 0.33
+pos_prob : 0.5
+pos_unk_dropout : 1.0
+position_dim : 0
+positive_dist_train : 
+positive_test : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/positive_0_CDR_train_dev.txt.proto
+positive_test_test : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/positive_0_CDR_test*.txt.proto
+positive_train : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos/positive_0_CDR_train.txt.proto
+random_seed : 1111
+reset_variance : False
+save_model : 
+semi_hard : False
+start_end : False
+text_batch : 8
+text_encoder : transformer_cnn_all_pairs
+text_epochs : 100
+text_prob : 1.0
+text_weight : 1.0
+thresholds : .1,.2,.3
+token_dim : 128
+train_dev_percent : 0.6
+tune_macro_f : False
+type_file : 
+use_peephole : False
+use_tanh : False
+variance_delta : 0.0
+variance_file : 
+variance_max : 99.9
+variance_min : 1.0
+variance_type : divide
+verbose : False
+vocab_dir : /home/rogupta/Team_project/bran/data/global_network/processed_10000_vocab_100000_training_128_dim/protos
+word_dropout : 0.5
+word_unk_dropout : 0.85
+Loading embeddings from /home/rogupta/Team_project/bran/embeddings/just_train_10000_128d 
+Loaded 9611/9622 embeddings (99.89% coverage)
+alpha: 0.084
+Loaded 0/20905 embeddings (0.00% coverage)
+alpha: 0.100
