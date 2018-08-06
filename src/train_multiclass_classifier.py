@@ -493,7 +493,7 @@ if __name__ == '__main__':
     tf.app.flags.DEFINE_string('layer_str', '1:1,5:1,1:1', 'transformer feed-forward layers (width:dilation)')
     # tf.app.flags.DEFINE_string('layer_str', '1:false,2:false,1:true', 'cnn layers (dilation:take)')
     tf.app.flags.DEFINE_string('variance_type', 'divide', 'type of variance model to use')
-    tf.app.flags.DEFINE_string('mode', 'train', 'deploy', 'train, evaluate, analyze')
+    tf.app.flags.DEFINE_string('mode', 'train' , 'train, evaluate, deploy, analyze')
     tf.app.flags.DEFINE_string('master', '', 'use for Supervisor')
     tf.app.flags.DEFINE_string('doc_filter', '', 'file to dev doc ids to split between train and test')
     tf.app.flags.DEFINE_string('thresholds', '.5,.6,.7,.75,.8,.85,.9,.95,.975', 'thresholds for prediction')
