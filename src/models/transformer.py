@@ -259,7 +259,7 @@ class Transformer(TextEncoder):
                 width, dilation = [int(x) for x in l_params.split(':')]
                 dim = num_units[1] if i == (len(layer_params)-1) else num_units[0]
 
-                print('dimension: %d  width: %d  dilation: %d' % (dim, width, dilation))
+                #print('dimension: %d  width: %d  dilation: %d' % (dim, width, dilation))
                 params = {"inputs": outputs, "filters": dim, "kernel_size": width,
                           "activation": tf.nn.relu, "use_bias": True, "padding": "same", "dilation_rate": dilation}
                 outputs = tf.layers.conv1d(**params)
