@@ -511,7 +511,7 @@ class GLUAllPairs(Transformer):
                 width, dilation = [int(x) for x in l_params.split(':')]
                 dim = self.lstm_dim*2
 
-                print('dimension: %d  width: %d  dilation: %d' % (dim, width, dilation))
+                #print('dimension: %d  width: %d  dilation: %d' % (dim, width, dilation))
                 params = {"inputs": inputs, "filters": dim, "kernel_size": width,
                           "activation": None, "use_bias": True, "padding": "same", "dilation_rate": dilation}
                 outputs = tf.layers.conv1d(**params)
