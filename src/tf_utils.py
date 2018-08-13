@@ -153,7 +153,7 @@ def residual_layer(input, w, b, filter_width, dilation, nonlinearity, batch_norm
 
 def orthonormal_initializer(input_size, output_size):
     """"""
-    print(tf.get_variable_scope().name)
+    #print(tf.get_variable_scope().name)
     I = np.eye(output_size)
     lr = .1
     eps = .05/(output_size + input_size)
@@ -172,9 +172,10 @@ def orthonormal_initializer(input_size, output_size):
                 break
         success = True
     if success:
-        print('Orthogonal pretrainer loss: %.2e' % loss)
+        pass
+        #print('Orthogonal pretrainer loss: %.2e' % loss)
     else:
-        print('Orthogonal pretrainer failed, using non-orthogonal random matrix')
+        #print('Orthogonal pretrainer failed, using non-orthogonal random matrix')
         Q = np.random.randn(input_size, output_size) / np.sqrt(output_size)
     return Q.astype(np.float32)
 

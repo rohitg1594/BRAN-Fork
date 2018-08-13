@@ -71,9 +71,9 @@ class Transformer(TextEncoder):
 
         output = []
         last_output = selected_col_embeddings
-        if not reuse:
-            print('___aggregation type:  %s filter %d  block repeats: %d___'
-                  % (aggregation, self.filter_width, self.block_repeats))
+        #if not reuse:
+        #    print('___aggregation type:  %s filter %d  block repeats: %d___'
+        #          % (aggregation, self.filter_width, self.block_repeats))
         for i in range(1):
             block_reuse = (reuse if i == 0 else True)
             encoded_tokens = self.forward(last_output, middle_dropout_keep_prob,
