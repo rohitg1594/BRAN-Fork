@@ -35,7 +35,7 @@ args = parser.parse_args()
 wpt = WordPieceTokenizer(join(args.bran_dir, 'deploy/bpe.vocab'), entity_str=ENTITY_STRING)
 tokenize = wpt.tokenize
 
-FLAGS = parse_flags(join(args.bran_dir, 'deploy/gnltw_flags.vocab'), FLAGS)
+FLAGS = parse_flags(join(args.bran_dir, 'deploy/gnltw_flags.txt'), FLAGS)
 
 if ('transformer' in FLAGS.text_encoder or 'glu' in FLAGS.text_encoder) and FLAGS.token_dim == 0:
     FLAGS.token_dim = FLAGS.embed_dim-(2*FLAGS.position_dim)
