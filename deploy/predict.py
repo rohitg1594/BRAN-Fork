@@ -173,5 +173,9 @@ with tf.Graph().as_default():
         fb15k_eval = None
         tac_eval = None
         out_file = ''
-        predictions = export_predictions(sess, model, FLAGS, args.pid, string_int_maps, threshold_map=THRESHOLD_MAP)
+        predictions = export_predictions(sess, model, FLAGS, args.pid, string_int_maps, threshold_map=THRESHOLD_MAP,
+                                         max_sent_len=args.max_sent_len, tokenize=tokenize)
         print('Done')
+
+for prediction in predictions:
+    print(prediction)
