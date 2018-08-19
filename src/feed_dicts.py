@@ -19,8 +19,6 @@ def batch_feed_dict(batcher, sess, model, FLAGS, evaluate=False, string_int_maps
             b, r, c = zip(*ep_indices)
             break
         except:
-            print('EP_INDICES, LEN : {}, VALUES : {}'.format(len(ep_indices), ep_indices))
-            print('GOING TO NEXT BATCH')
             continue
 
     ep_dist[b, r, c] = 0.0
