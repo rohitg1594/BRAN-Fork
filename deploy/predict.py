@@ -9,7 +9,7 @@ from src.models.classifier_models import *
 from src.feed_dicts import *
 from src.processing.utils.word_piece_tokenizer import WordPieceTokenizer
 
-from utils import export_predictions
+from utils import export_predictions, parse_flags
 
 tf.logging.set_verbosity('ERROR')
 
@@ -34,6 +34,8 @@ parser.add_argument('--pid', type=int, help='PUBMED ID to predict on.')
 args = parser.parse_args()
 wpt = WordPieceTokenizer(join(args.bran_dir, 'deploy/bpe.vocab'), entity_str=ENTITY_STRING)
 tokenize = wpt.tokenize
+
+FLAGS = parse_flags(join(args.bran_dir, 'deploy/bpe.vocab'), FLAGS)
 
 if ('transformer' in FLAGS.text_encoder or 'glu' in FLAGS.text_encoder) and FLAGS.token_dim == 0:
     FLAGS.token_dim = FLAGS.embed_dim-(2*FLAGS.position_dim)
