@@ -73,7 +73,6 @@ def parse_pubtator(pid, model, tokenize=None, str_id_maps=None, max_sent_len=200
     tokens = np.array(tokens)
 
     seq_len = [len(s) for s in orig_tokenized_sentences]
-    print(seq_len)
 
     ner_labels, entities, e, e_dist = make_example(result, seq_len, str_id_maps=str_id_maps, tokenize=tokenize,
                                                    max_sent_len=max_sent_len)
@@ -188,8 +187,6 @@ def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_l
     replaced_text.append(current_pub[end:])
     abstract = ''.join(replaced_text).replace('  ', ' ')
     sentences = sent_tokenize(abstract)
-    for sent in sentences:
-        print(len(sent))
     tokenized_sentences = [[w for w in tokenize(s)] for s in sentences]
 
     out_sentence = [[tokenize(annotation_map[token][0]) if token.startswith(ENTITY_STRING) else [token]
@@ -205,8 +202,6 @@ def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_l
                        for (i, token) in enumerate(sentence) if token.startswith(ENTITY_STRING)]
                       for length, offset, sentence
                       in zip(token_lens, token_offsets, tokenized_sentences)]
-    print(entity_offsets)
-    print(len(entity_offsets))
 
     num_sentences = len(entity_offsets)
     ner_labels = np.zeros((num_sentences, max_sent_len))
@@ -215,7 +210,6 @@ def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_l
     e1_dist_abst = []
 
     for sent_idx, sent_offsets in enumerate(entity_offsets):
-        print(sent_idx)
         sent_len = seq_len[sent_idx]
         token_idx = 0
         prev_end = 0

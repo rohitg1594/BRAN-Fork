@@ -177,5 +177,8 @@ with tf.Graph().as_default():
                                          max_sent_len=args.max_sent_len, tokenize=tokenize)
         print('Done')
 
-for prediction in predictions:
-    print(prediction)
+if len(predictions) == 0:
+    print("No relations found.")
+else:
+    for prediction in predictions:
+        print(prediction)
