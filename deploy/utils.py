@@ -50,7 +50,7 @@ def parse_flags(flag_file, flags):
     return flags
 
 
-def parse_pubtator(pid, model, tokenize=None, str_id_maps=None, max_sent_len=200):
+def parse_pubtator(pid, model, tokenize=None, str_id_maps=None):
     url_submit = ncbi_url + str(pid) + "/PubTator/"
     try:
         urllib_result = requests.get(url_submit, timeout=1)
@@ -66,13 +66,13 @@ def parse_pubtator(pid, model, tokenize=None, str_id_maps=None, max_sent_len=200
     sent_list.append(title)
     sent_list.extend(sent_tokenize(abst))
     orig_tokenized_sentences = [tokenize(sent) for sent in sent_list]
+    seq_len = [len(s) for s in orig_tokenized_sentences]
     unequal_tokens = [[token_str_id_map.get(token, 1) for token in sent] for sent in orig_tokenized_sentences]
     tokens = []
+    max_sent_len = max(seq_len)
     for sent in unequal_tokens:
         tokens.append(equalize_len(sent, max_sent_len))
     tokens = np.array(tokens)
-
-    seq_len = [len(s) for s in orig_tokenized_sentences]
 
     ner_labels, entities, e, e_dist = make_example(result, seq_len, str_id_maps=str_id_maps, tokenize=tokenize,
                                                    max_sent_len=max_sent_len)
@@ -261,14 +261,13 @@ def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_l
     return ner_labels, entities, e1_abst, e1_dist_abst
 
 
-def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, threshold_map=None, max_sent_len=500):
+def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, threshold_map=None):
     print('Evaluating')
     null_label_set = set([int(l) for l in FLAGS.null_label.split(',')])
 
     result_list = [model.probs, model.label_batch, model.e1_batch, model.e2_batch]
 
-    feed_dict, batch_size, doc_ids = parse_pubtator(pid, model, tokenize=tokenize, str_id_maps=string_int_maps,
-                                                    max_sent_len=max_sent_len)
+    feed_dict, batch_size, doc_ids = parse_pubtator(pid, model, tokenize=tokenize, str_id_maps=string_int_maps)
 
     probs, labels, e1, e2 = sess.run(result_list, feed_dict=feed_dict)
     labeled_scores = [(l, np.argmax(s), np.max(s), _e1, _e2, did)
