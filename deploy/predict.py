@@ -27,8 +27,7 @@ THRESHOLD_MAP = {1: 0.3,
 parser = argparse.ArgumentParser(description='Script to use bran with PUBMEDID.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--bran_dir', type=str, help='path to bran')
-parser.add_argument('--max_sent_len', type=int, help='Maximum number of tokens in a sentence.')
-parser.add_argument('--max_num_sent', type=int, help='Maximum number of sentences in an abstract.')
+parser.add_argument('--max_sent_len', type=int, default=100, help='Maximum number of tokens in a sentence.')
 parser.add_argument('--pid', type=int, help='PUBMED ID to predict on.')
 
 args = parser.parse_args()
