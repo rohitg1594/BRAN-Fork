@@ -147,22 +147,30 @@ def predict(pid):
                 print("Deserializing model: %s" % FLAGS.load_model)
                 saver.restore(sess, join(bran_dir, FLAGS.load_model))
 
-            predictions = export_predictions(sess, model, FLAGS, pid, string_int_maps,
+            predictions, ent_type_map = export_predictions(sess, model, FLAGS, pid, string_int_maps,
                                              threshold_map=THRESHOLD_MAP, tokenize=tokenize)
             print('Done')
 
-    return predictions
-
-
-if __name__ == '__main__':
-    predictions = predict(args.pid)
-
     predictions_dict = {}
-    for prediction in predictions:
+    for i, prediction in enumerate(predictions):
         parts = prediction.split('\t')
         theme = parts[1]
         entity_1 = parts[2]
+        type_1 = ent_type_map[entity_1]
         entity_2 = parts[3]
+        type_2 = ent_type_map[entity_2]
+
+        predictions_dict['K{}'.format(i)] = {'theme': theme,
+                                             'entities': [entity_1, entity_2],
+                                             'entity_types': [type_1, type_2]}
+
+    return predictions, predictions_dict
+
+
+if __name__ == '__main__':
+    predictions, predictions_dict = predict(args.pid)
+
+    print(predictions_dict)
 
     if len(predictions) == 0:
         print("No relations found.")
@@ -170,4 +178,5 @@ if __name__ == '__main__':
         with open(args.output, 'w') as f:
             for prediction in predictions:
                 f.write(prediction)
+                print(prediction)
 

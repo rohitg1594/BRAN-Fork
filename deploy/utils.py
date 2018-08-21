@@ -66,6 +66,8 @@ def parse_pubtator(pid, model, tokenize=None, str_id_maps=None):
     result = urllib_result.text.strip().split('\n')
     title = result[0].split('|')[2]
     abst = result[1].split('|')[2]
+    anns = result[2:]
+
     token_str_id_map = str_id_maps['token_str_id_map']
     sent_list = []
     sent_list.append(title)
@@ -135,7 +137,7 @@ def parse_pubtator(pid, model, tokenize=None, str_id_maps=None):
                  model.example_loss_weights: ex_loss,
                  model.ep_dist_batch: ep_dist}
 
-    return feed_dict, final_e1.shape[0], doc_ids, ner_labels
+    return feed_dict, final_e1.shape[0], doc_ids, anns
 
 
 def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_len=200):
@@ -269,10 +271,15 @@ def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_l
 def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, threshold_map=None):
     print('Evaluating')
     null_label_set = set([int(l) for l in FLAGS.null_label.split(',')])
-
     result_list = [model.probs, model.label_batch, model.e1_batch, model.e2_batch]
+    feed_dict, batch_size, doc_ids, anns = parse_pubtator(pid, model, tokenize=tokenize, str_id_maps=string_int_maps)
 
-    feed_dict, batch_size, doc_ids, ner_labels = parse_pubtator(pid, model, tokenize=tokenize, str_id_maps=string_int_maps)
+    ent_type_map = {}
+    for ann in anns:
+        parts = ann.split('\t')
+        ent_type = parts[4]
+        mesh_id = parts[5]
+        ent_type_map[mesh_id] = ent_type
 
     probs, labels, e1, e2 = sess.run(result_list, feed_dict=feed_dict)
     labeled_scores = [(l, np.argmax(s), np.max(s), _e1, _e2, did)
@@ -295,4 +302,4 @@ def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, 
                          for _e1, _e2, did in mapped_predictions]
             final_out.extend(out_lines)
 
-    return set(final_out)
+    return set(final_out), ent_type_map
