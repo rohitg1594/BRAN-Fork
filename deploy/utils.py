@@ -49,7 +49,7 @@ def parse_flags(bran_dir, flags):
 
             flags.__dict__[k] = v
 
-    flags.__dict__['load_model'] = "/home/rogupta/Team_project/bran$ less pre_trained_models/global_network/100k_abst/" + \
+    flags.__dict__['load_model'] = "/home/rogupta/Team_project/bran/pre_trained_models/global_network/100k_abst/" + \
                                    "chemical_disease_10000_vocab_100000_training_128_dim.tf"
 
     return flags
