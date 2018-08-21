@@ -37,7 +37,7 @@ tokenize = wpt.tokenize
 
 FLAGS = parse_flags(bran_dir, FLAGS)
 if not args.output:
-    args.output = '{}.tsv'.format(args.pid)
+    args.output = 'output/{}.tsv'.format(args.pid)
 
 if ('transformer' in FLAGS.text_encoder or 'glu' in FLAGS.text_encoder) and FLAGS.token_dim == 0:
     FLAGS.token_dim = FLAGS.embed_dim-(2*FLAGS.position_dim)
