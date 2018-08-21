@@ -276,12 +276,15 @@ def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, 
 
     ent_type_map = {}
     for ann in anns:
+        print(ann)
         parts = ann.split()
+        print(parts)
         if len(parts) == 6:
             ent_type = parts[4]
             if ent_type in ['Disease', 'Chemical']:
                 mesh_id = parts[5]
                 ent_type_map[mesh_id] = ent_type
+        print(ent_type_map)
     print(ent_type_map)
 
     probs, labels, e1, e2 = sess.run(result_list, feed_dict=feed_dict)
