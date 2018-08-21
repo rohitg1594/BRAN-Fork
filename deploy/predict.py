@@ -156,10 +156,18 @@ def predict(pid):
         prediction = prediction.strip()
         parts = prediction.split('\t')
         theme = parts[1]
-        entity_1 = parts[2]
-        type_1 = ent_type_map[entity_1.split(':', 1)[1]]
-        entity_2 = parts[3]
-        type_2 = ent_type_map[entity_2.split(':', 1)[1]]
+
+        entity_1 = parts[2].split(':')[2]
+        for k in ent_type_map.keys():
+            if entity_1 in k:
+                type_1 = ent_type_map[k]
+                break
+
+        entity_2 = parts[2].split(':')[2]
+        for k in ent_type_map.keys():
+            if entity_2 in k:
+                type_2 = ent_type_map[k]
+                break
 
         predictions_dict['K{}'.format(i)] = {'theme': theme,
                                              'entities': [entity_1, entity_2],
