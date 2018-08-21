@@ -176,7 +176,7 @@ def predict(pid):
                                                  'entities': [entity_1, entity_2],
                                                  'entity_types': [type_1, type_2]}
 
-    return predictions, predictions_dict
+    return predictions_final, predictions_dict
 
 
 if __name__ == '__main__':
