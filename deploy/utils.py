@@ -277,7 +277,7 @@ def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, 
     ent_type_map = {}
     for ann in anns:
         print(ann)
-        parts = ann.split()
+        parts = ann.split('\t')
         print(parts)
         if len(parts) == 6:
             ent_type = parts[4]
