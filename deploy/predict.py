@@ -158,12 +158,14 @@ def predict(pid):
         theme = parts[1]
 
         entity_1 = parts[2].split(':')[2]
+        print(entity_1)
         for k in ent_type_map.keys():
             if entity_1 in k:
                 type_1 = ent_type_map[k]
                 break
 
         entity_2 = parts[2].split(':')[2]
+        print(entity_2)
         for k in ent_type_map.keys():
             if entity_2 in k:
                 type_2 = ent_type_map[k]
