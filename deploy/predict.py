@@ -151,8 +151,8 @@ def predict(pid):
                                              threshold_map=THRESHOLD_MAP, tokenize=tokenize)
             print('Done')
 
-    predictions_final = list
-    predictions_dict = dict
+    predictions_final = []
+    predictions_dict = {}
     for i, prediction in enumerate(predictions):
         prediction = prediction.strip()
         parts = prediction.split('\t')
