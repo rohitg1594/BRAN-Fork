@@ -151,7 +151,8 @@ def predict(pid):
                                              threshold_map=THRESHOLD_MAP, tokenize=tokenize)
             print('Done')
 
-    predictions_dict = {}
+    predictions_final = list
+    predictions_dict = dict
     for i, prediction in enumerate(predictions):
         prediction = prediction.strip()
         parts = prediction.split('\t')
@@ -169,9 +170,11 @@ def predict(pid):
                 type_2 = ent_type_map[k]
                 break
 
-        predictions_dict['K{}'.format(i)] = {'theme': theme,
-                                             'entities': [entity_1, entity_2],
-                                             'entity_types': [type_1, type_2]}
+        if type_1 != type_2:
+            predictions_final.append(prediction)
+            predictions_dict['K{}'.format(i)] = {'theme': theme,
+                                                 'entities': [entity_1, entity_2],
+                                                 'entity_types': [type_1, type_2]}
 
     return predictions, predictions_dict
 
@@ -186,6 +189,6 @@ if __name__ == '__main__':
     else:
         with open(args.output, 'w') as f:
             for prediction in predictions:
-                f.write(prediction)
+                f.write(prediction + '\n')
                 print(prediction)
 
