@@ -28,7 +28,7 @@ THRESHOLD_MAP = {1: 0.3,
 parser = argparse.ArgumentParser(description='Script to use bran with PUBMEDID.',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--pid', type=int, help='PUBMED ID to predict on.')
-parser.add_argument('-o', '--out', type=str, help='Output file for predictions.')
+parser.add_argument('-o', '--output', type=str, help='Output file for predictions.')
 
 bran_dir = os.getenv("BRAN_DIR")
 args = parser.parse_args()
@@ -146,7 +146,7 @@ def main():
             if FLAGS.load_model != '':
                 print("Deserializing model: %s" % FLAGS.load_model)
                 saver.restore(sess, join(bran_dir, FLAGS.load_model))
-                
+
             predictions = export_predictions(sess, model, FLAGS, args.pid, string_int_maps,
                                              threshold_map=THRESHOLD_MAP, tokenize=tokenize)
             print('Done')
