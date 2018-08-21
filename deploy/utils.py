@@ -1,4 +1,5 @@
 import sys
+from os.path import join
 
 import re
 import numpy as np
@@ -23,7 +24,8 @@ def equalize_len(data, max_size):
         return data
 
 
-def parse_flags(flag_file, flags):
+def parse_flags(bran_dir, flags):
+    flag_file = join(bran_dir, 'deploy/gnltw_flags.txt')
     with open(flag_file, 'r') as f:
         for line in f:
             if line.startswith('Loading'):
