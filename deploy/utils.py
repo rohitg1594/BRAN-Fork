@@ -74,7 +74,7 @@ def parse_pubtator(pid, model, tokenize=None, str_id_maps=None):
     seq_len = [len(s) for s in orig_tokenized_sentences]
     unequal_tokens = [[token_str_id_map.get(token, 1) for token in sent] for sent in orig_tokenized_sentences]
     tokens = []
-    max_sent_len = max(seq_len)
+    max_sent_len = max(seq_len) + 20  # TODO: Fix Hack
     for sent in unequal_tokens:
         tokens.append(equalize_len(sent, max_sent_len))
     tokens = np.array(tokens)
@@ -135,7 +135,7 @@ def parse_pubtator(pid, model, tokenize=None, str_id_maps=None):
                  model.example_loss_weights: ex_loss,
                  model.ep_dist_batch: ep_dist}
 
-    return feed_dict, final_e1.shape[0], doc_ids
+    return feed_dict, final_e1.shape[0], doc_ids, ner_labels
 
 
 def make_example(text_list, seq_len, str_id_maps=None, tokenize=None, max_sent_len=200):
@@ -272,7 +272,7 @@ def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, 
 
     result_list = [model.probs, model.label_batch, model.e1_batch, model.e2_batch]
 
-    feed_dict, batch_size, doc_ids = parse_pubtator(pid, model, tokenize=tokenize, str_id_maps=string_int_maps)
+    feed_dict, batch_size, doc_ids, ner_labels = parse_pubtator(pid, model, tokenize=tokenize, str_id_maps=string_int_maps)
 
     probs, labels, e1, e2 = sess.run(result_list, feed_dict=feed_dict)
     labeled_scores = [(l, np.argmax(s), np.max(s), _e1, _e2, did)

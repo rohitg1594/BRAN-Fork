@@ -37,13 +37,13 @@ tokenize = wpt.tokenize
 
 FLAGS = parse_flags(bran_dir, FLAGS)
 if not args.output:
-    args.output = '{}.txt'.format(args.pid)
+    args.output = '{}.tsv'.format(args.pid)
 
 if ('transformer' in FLAGS.text_encoder or 'glu' in FLAGS.text_encoder) and FLAGS.token_dim == 0:
     FLAGS.token_dim = FLAGS.embed_dim-(2*FLAGS.position_dim)
 
 
-def main():
+def predict(pid):
     # read in str <-> int vocab maps
     with open(FLAGS.vocab_dir + '/rel.txt', 'r') as f:
         kb_str_id_map = {l.split('\t')[0]: int(l.split('\t')[1].strip()) for l in f.readlines()}
@@ -147,7 +147,7 @@ def main():
                 print("Deserializing model: %s" % FLAGS.load_model)
                 saver.restore(sess, join(bran_dir, FLAGS.load_model))
 
-            predictions = export_predictions(sess, model, FLAGS, args.pid, string_int_maps,
+            predictions = export_predictions(sess, model, FLAGS, pid, string_int_maps,
                                              threshold_map=THRESHOLD_MAP, tokenize=tokenize)
             print('Done')
 
@@ -155,14 +155,19 @@ def main():
 
 
 if __name__ == '__main__':
-    predictions = main()
+    predictions = predict(args.pid)
+
+    predictions_dict = {}
+    for prediction in predictions:
+        parts = prediction.split('\t')
+        theme = parts[1]
+        entity_1 = parts[2]
+        entity_2 = parts[3]
 
     if len(predictions) == 0:
         print("No relations found.")
     else:
-        for prediction in predictions:
-            print(prediction)
+        with open(args.output, 'w') as f:
+            for prediction in predictions:
+                f.write(prediction)
 
-    with open(args.output, 'w') as f:
-        for prediction in predictions:
-            f.write(prediction)
