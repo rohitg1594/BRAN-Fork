@@ -154,6 +154,9 @@ def predict(pid):
     predictions_dict = {}
     for i, prediction in enumerate(predictions):
         parts = prediction.split('\t')
+        print(parts)
+        parts = prediction.split()
+        print(parts)
         theme = parts[1]
         entity_1 = parts[2]
         type_1 = ent_type_map[entity_1]
