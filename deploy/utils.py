@@ -277,6 +277,9 @@ def export_predictions(sess, model, FLAGS, pid, string_int_maps, tokenize=None, 
     ent_type_map = {}
     for ann in anns:
         parts = ann.split('\t')
+        print(parts)
+        parts = ann.split()
+        print(parts)
         ent_type = parts[4]
         mesh_id = parts[5]
         ent_type_map[mesh_id] = ent_type
