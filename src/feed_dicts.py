@@ -1,6 +1,7 @@
 import numpy as np
 import src.tf_utils as tf_utils
 
+
 def batch_feed_dict(batcher, sess, model, FLAGS, evaluate=False, string_int_maps=None):
     while True:
         batch = batcher.next_batch(sess)
