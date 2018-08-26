@@ -275,7 +275,7 @@ def main(argv):
         ner_test_batcher = NERInMemoryBatcher(FLAGS.ner_test, 1, FLAGS.max_seq, 10) if FLAGS.ner_test else None
         ner_batcher = NERBatcher(FLAGS.ner_train, FLAGS.text_epochs, FLAGS.max_seq, FLAGS.ner_batch) \
             if FLAGS.ner_train != '' else None
-        print(tf.global_variables())
+
         # initialize model
         if 'multi' in FLAGS.model_type and 'label' in FLAGS.model_type:
             model_type = MultiLabelClassifier
@@ -286,7 +286,6 @@ def main(argv):
         print('Model type: %s ' % FLAGS.model_type)
         model = model_type(ep_vocab_size, entity_vocab_size, kb_vocab_size, token_vocab_size, position_vocab_size,
                            ner_label_vocab_size, word_embedding_matrix, entity_embedding_matrix, string_int_maps, FLAGS)
-        print(tf.global_variables())
 
         # optimization
         learning_rate = tf.train.exponential_decay(FLAGS.lr, model.global_step, FLAGS.lr_decay_steps,
@@ -367,8 +366,6 @@ def main(argv):
             reader = tf.train.NewCheckpointReader(FLAGS.load_model)
             cp_list = set([key for key in reader.get_variable_to_shape_map()])
             # if variable does not exist in checkpoint or sizes do not match, dont load
-            print(tf.global_variables())
-            sys.exit(1)
             r_vars = [k for k in tf.global_variables() if k.name.split(':')[0] in cp_list
                         and k.get_shape() == reader.get_variable_to_shape_map()[k.name.split(':')[0]]]
             if len(cp_list) != len(r_vars):
